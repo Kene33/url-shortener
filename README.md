@@ -248,7 +248,7 @@ Email verification, password reset, and email 2FA need an email provider when yo
 
 ### Supabase Free Plan keepalive
 
-The Vercel production deployment runs `/api/v1/internal/keepalive` five times per day at 00:00, 05:00, 10:00, 15:00, and 20:00 UTC. It sends a protected `SELECT 1` query to PostgreSQL so a Free Plan Supabase project receives regular database activity. Add `CRON_SECRET` to the Vercel Production environment; Vercel sends it as the cron request's bearer token. The endpoint is intentionally hidden from the public OpenAPI schema.
+GitHub Actions runs `/api/v1/internal/keepalive` five times per day at 00:00, 05:00, 10:00, 15:00, and 20:00 UTC. Vercel Hobby allows only one Cron Job per day, so the schedule is kept in GitHub Actions instead. The job sends a protected `SELECT 1` query to PostgreSQL so a Free Plan Supabase project receives regular database activity. Add the same `CRON_SECRET` to Vercel Production and GitHub repository secrets. The endpoint is intentionally hidden from the public OpenAPI schema.
 
 ## Supporting Docs
 

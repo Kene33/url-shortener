@@ -1,0 +1,18 @@
+name: Supabase keepalive
+
+on:
+  schedule:
+    - cron: "0 0,5,10,15,20 * * *"
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping production database
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: >-
+          curl --fail-with-body --silent --show-error --retry 3
+          --header "Authorization: Bearer ${CRON_SECRET}"
+          https://url-shortener-kene33s-projects.vercel.app/api/v1/internal/keepalive
