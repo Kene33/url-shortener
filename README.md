@@ -246,6 +246,10 @@ cd frontend && npm run test:e2e
 
 Email verification, password reset, and email 2FA need an email provider when you enable them in production.
 
+### Supabase Free Plan keepalive
+
+The Vercel production deployment runs `/api/v1/internal/keepalive` once per day. It sends a protected `SELECT 1` query to PostgreSQL so a Free Plan Supabase project receives regular database activity. Add `CRON_SECRET` to the Vercel Production environment; Vercel sends it as the cron request's bearer token. The endpoint is intentionally hidden from the public OpenAPI schema.
+
 ## Supporting Docs
 
 - [CONTRIBUTING.md](./CONTRIBUTING.md)

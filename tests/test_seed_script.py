@@ -10,6 +10,7 @@ async def test_demo_seed_requires_password(tmp_path):
         database_path=str(tmp_path / "demo.db"),
         database_url="postgresql://user:password@example.com:5432/app",
         redis_url="rediss://default:password@example.com:6379",
+        cron_secret="test-cron-secret",
         cors_origins=[],
         auth_secret_key="test-secret-key-with-at-least-24-characters",
     )
@@ -27,6 +28,7 @@ async def test_demo_seed_refuses_production(tmp_path):
         database_path=str(tmp_path / "demo.db"),
         database_url="postgresql://user:password@example.com:5432/app",
         redis_url="rediss://default:password@example.com:6379",
+        cron_secret="test-cron-secret",
         cors_origins=[],
         auth_secret_key="production-secret-key-with-at-least-24-chars",
         demo_seed_password="DemoPass123!",

@@ -2,6 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "frontend/dist",
+  "crons": [
+    {
+      "path": "/api/v1/internal/keepalive",
+      "schedule": "0 6 * * *"
+    }
+  ],
   "env": {
     "ENVIRONMENT": "production",
     "REFRESH_COOKIE_SECURE": "true",

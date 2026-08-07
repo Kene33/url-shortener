@@ -420,6 +420,7 @@ def test_production_settings_accept_external_storage():
         public_base_url="https://sho.rt",
         database_url="postgresql://user:password@example.com:5432/app",
         redis_url="rediss://default:password@example.com:6379",
+        cron_secret="cron-secret",
         refresh_cookie_secure=True,
         cors_origins=[],
     )

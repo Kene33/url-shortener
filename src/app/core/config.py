@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     user_link_retention_days_default: int = Field(default=365, ge=1, le=3650)
     email_2fa_code_minutes: int = Field(default=10, ge=1, le=60)
     email_provider_configured: bool = False
+    cron_secret: str | None = None
     admin_emails: list[str] = []
     demo_seed_password: str | None = None
     cors_origins: list[str] = [
@@ -69,6 +70,8 @@ class Settings(BaseSettings):
                 raise ValueError("CORS_ORIGINS must not contain a wildcard in production")
             if self.rate_limit_fail_closed_in_production is not True:
                 raise ValueError("Rate limiting must fail closed in production")
+            if not self.cron_secret:
+                raise ValueError("CRON_SECRET is required in production")
         refresh_cookie_samesite = self.refresh_cookie_samesite.lower()
         if refresh_cookie_samesite not in {"lax", "strict", "none"}:
             raise ValueError("REFRESH_COOKIE_SAMESITE must be lax, strict or none")
